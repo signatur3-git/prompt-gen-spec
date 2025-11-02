@@ -11,9 +11,9 @@ This roadmap focuses exclusively on the documentation artefacts required to prov
 | Milestone | Summary | Primary Workstreams | Status |
 | --- | --- | --- | --- |
 | M0 | Documentation discovery & planning | Program Management | ✅ Complete |
-| M1 | Source-of-truth alignment | Architecture, RFC, Glossary | 🔄 In progress |
-| M2 | Authoring Tool documentation blueprint | Authoring Tool, Compliance | 🔄 In progress |
-| M3 | Compliance framework drafting | Compliance, Validator | ⏳ Not started |
+| M1 | Source-of-truth alignment | Architecture, RFC, Glossary | ✅ Complete |
+| M2 | Authoring Tool documentation blueprint | Authoring Tool, Compliance | ✅ Complete |
+| M3 | Compliance framework drafting | Compliance, Validator | 🔄 In progress (framework + evidence templates published 2024-05-20) |
 | M4 | Implementation guide drafting | Rendering, Libraries, Marketplace | ⏳ Not started |
 | M5 | RFP consolidation & review | Program Management, Legal | ⏳ Not started |
 | M6 | Publication & handover | All | ⏳ Not started |
@@ -31,7 +31,7 @@ This roadmap focuses exclusively on the documentation artefacts required to prov
   2. Style guide reviewed by all workstream leads and linked from documentation index.
   3. Project plan approved with sign-off from governance and documentation editors.
 
-### M1 – Source-of-Truth Alignment *(In progress)*
+### M1 – Source-of-Truth Alignment *(Complete)*
 - **Purpose:** Align terminology, data models, and architectural references across all documentation tracks.
 - **Deliverables:**
   - Updated glossary synchronized with RFC 0001 terminology.
@@ -42,7 +42,9 @@ This roadmap focuses exclusively on the documentation artefacts required to prov
   2. Architecture overview reviewed by at least two documentation authors outside the architecture team.
   3. Mapping document stored in repository at `docs/project-management/m1-source-of-truth-mapping.md` and referenced in subsequent milestone briefs.
 
-### M2 – Authoring Tool Documentation Blueprint *(In progress)*
+> **Dependency Note:** Remaining follow-up items (e.g., compliance traceability hooks and publication workflow checkpoints) are now tracked under the M3 and M6 milestones so M1 can close without additional work.
+
+### M2 – Authoring Tool Documentation Blueprint *(Complete)*
 - **Purpose:** Define the structure, content outline, and research tasks for the Authoring Tool documentation package.
 - **Deliverables:**
   - Detailed outline covering user journeys, CLI/API references, UI flows (if applicable), and compliance touchpoints, published at [`docs/project-management/m2-authoring-tool-blueprint.md`](./m2-authoring-tool-blueprint.md).
@@ -53,16 +55,20 @@ This roadmap focuses exclusively on the documentation artefacts required to prov
   2. Evidence checklist integrated into documentation backlog with owners assigned.
   3. SME questionnaire distributed and interview schedule confirmed.
 
-### M3 – Compliance Framework Drafting
+> **Governance Update (2024-05-18):** Steering Committee fast-tracked approval of the blueprint and confirmed the compliance evidence linkage captured during M2, clearing the milestone for closure and unlocking M3 drafting activities.
+
+### M3 – Compliance Framework Drafting *(In progress)*
 - **Purpose:** Document the compliance tiers and validation pathways that govern Authoring Tool outputs and package lifecycle.
 - **Deliverables:**
-  - Draft compliance guide detailing Baseline, Advanced, and Premium criteria for authoring, validation, and review workflows.
-  - Validation evidence templates (checklists, report formats) to be used in the RFP and support materials.
-  - Traceability matrix linking compliance criteria to RFC clauses and sanity checks.
+  - Draft compliance guide detailing Baseline, Advanced, and Premium criteria for authoring, validation, and review workflows (see [`m3-compliance-framework-draft.md`](./m3-compliance-framework-draft.md)).
+- Validation evidence templates (checklists, report formats) to be used in the RFP and support materials, beginning with the CV-BAS-01 Baseline checklist pilot and extending through CV-ADV-01 and CV-PREM-01 outlines stored in `docs/compliance/`.
+- Traceability matrix linking compliance criteria to RFC clauses and sanity checks (CSV published at `docs/compliance/m3-traceability-matrix.csv`).
 - **Acceptance Criteria:**
   1. Draft compliance guide circulated for cross-stream review with tracked feedback resolved.
   2. Evidence templates tested against at least one reference package walkthrough.
   3. Traceability matrix stored in repository and referenced from compliance guide draft.
+
+> **Current Focus (2024-05-20):** Walk validator team through the published compliance artefacts (`docs/compliance/`), execute the Baseline checklist pilot (CV-BAS-01) on `sample-packages/baseline-demo`, and update the traceability matrix CSV with pilot results before the 2024-05-22 council. The [M3 draft](./m3-compliance-framework-draft.md) tracks open questions.
 
 ### M4 – Implementation Guide Drafting
 - **Purpose:** Produce cohesive drafts for each implementation guidance document referenced by the RFP (Authoring Tool, Validator, Rendering Engine, Shared Libraries, Marketplace).

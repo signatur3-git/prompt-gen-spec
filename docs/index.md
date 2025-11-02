@@ -28,7 +28,8 @@ The Random Prompt Generator (RPG) initiative defines a deterministic, package-dr
   - [Documentation Project Plan](./project-management/documentation-project-plan.md)
 - [Documentation Style Guide](./project-management/documentation-style-guide.md)
 - [Source-of-Truth Mapping](./project-management/m1-source-of-truth-mapping.md)
-  - [Authoring Tool Blueprint (M2 In Progress)](./project-management/m2-authoring-tool-blueprint.md)
+  - [Authoring Tool Blueprint (M2 Complete)](./project-management/m2-authoring-tool-blueprint.md)
+- [Compliance Documentation Index](./compliance/index.md)
 
 ## Reference Implementation Targets
 
@@ -42,8 +43,8 @@ The v1.0.0.rc1 roadmap covers five collaborating workstreams. Each library or se
 
 ## Status
 
-- **Current milestone:** M2 – Authoring Tool Documentation Blueprint with workstream review underway.
-- **Next steps:** Finalize the Authoring Tool outline, capture evidence assets per the M2 checklist, and schedule SME interviews.
+- **Current milestone:** M3 – Compliance framework drafting with validator pilot preparation underway.
+- **Next steps:** Execute the Baseline checklist pilot, capture Advanced worksheet feedback, and update the traceability matrix CSV.
 - **Roadmap & RFP planning:** See the [delivery roadmap](./project-management/milestones.md) and [RFP outline](./project-management/rfp-outline.md) for milestone tracking and vendor guidance.
 
 ## Feedback and Contributions
