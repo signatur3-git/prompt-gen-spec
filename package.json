@@ -1,0 +1,18 @@
+{
+  "name": "prompt-gen-spec",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Specification site for the Composite Random Prompt Generator (CRPG).",
+  "license": "CC0-1.0",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs",
+    "lint": "npm run check:prettier",
+    "check:prettier": "prettier --check \"**/*.{md,ts,js,json,yml,yaml}\""
+  },
+  "devDependencies": {
+    "prettier": "3.2.5",
+    "vitepress": "1.2.3"
+  }
+}

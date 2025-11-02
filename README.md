@@ -1,3 +1,10 @@
+# prompt-gen-spec
+
+A full spec for an ambitious Composite Random Prompt Generation System.
+
+The documentation lives under [`docs/`](docs/). Start with the [overview](docs/index.md) and browse additional sections through the
+VitePress navigation when running the local preview. Operational guidance for previewing, building, and contributing is collected
+in [`docs/operations/index.md`](docs/operations/index.md).
 # Composite Random Prompt Generator Specification
 
 This repository contains the evolving specification for the Composite Random Prompt Generator (CRPG) ecosystem. The spec is organized as Markdown documents that can be published with GitHub Pages or rendered locally using [VitePress](https://vitepress.dev/).
