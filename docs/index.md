@@ -19,6 +19,10 @@ The Composite Random Prompt Generator (CRPG) project defines a deterministic, ex
 - [RFC 0001: Composite Random Prompt Generator](./rfc/0001-composite-random-prompt-generator.md)
 - [Glossary](./glossary.md)
 
+## Repository Guides
+
+- [Operations Guide](./operations/index.md)
+
 ## Tooling Vision
 
 The repository uses Markdown-first documentation so it can be published through GitHub Pages or rendered locally with VitePress. Diagrams and charts are written in [Mermaid](https://mermaid.js.org/) code blocks to ensure compatibility with both environments.
