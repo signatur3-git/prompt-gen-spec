@@ -1,78 +1,127 @@
 ---
-title: Architecture Components
+title: Architecture & Data Model
 ---
 
-# Architecture Components
+# RPG Architecture & Data Model
 
-The Composite Random Prompt Generator (CRPG) ecosystem is composed of modular components that can be combined into packages and distributed via marketplaces. The sections below outline the core components and their responsibilities.
+The Random Prompt Generator (RPG) ecosystem separates creation, validation, rendering, and distribution so teams can innovate independently while remaining interoperable. This guide summarises the component responsibilities and the shared data model that enables deterministic prompt generation.
 
 ```mermaid
 graph LR
     Authoring[Authoring Tool]
     Validator[Package Validator]
     Renderer[Rendering Engine]
+    Libraries[Reference Libraries]
     Marketplace[Marketplace]
-    Packages[Package Registry]
 
-    Authoring -->|Publishes| Packages
-    Packages -->|Validated by| Validator
-    Packages -->|Consumed by| Renderer
-    Renderer -->|Available through| Marketplace
-    Marketplace -->|Configures| Authoring
+    Authoring -->|Publishes| Libraries
+    Libraries -->|Validated by| Validator
+    Libraries -->|Consumed by| Renderer
+    Renderer -->|Feeds Back To| Authoring
+    Marketplace -->|Distributes| Libraries
+    Marketplace -->|Supplies| Renderer
 ```
 
-## Authoring Tool
+## System Components
 
-The authoring tool provides creators with an integrated environment for defining:
+### Authoring Tool
 
-- **Packages and Namespaces:** Manage package metadata, declare dependencies, and allocate assets into namespaces.
-- **Datatypes:** Describe structured data primitives and complex types used by prompt sections and ontologies.
-- **Ontologies:** Model domain-specific vocabularies, relationships, and context for language-aware rendering.
-- **Prompt Sections:** Create template-driven building blocks that can reference other sections to produce composite prompts.
-- **Separator Sets:** Configure locale-aware separators for enumerations (e.g., `", "`, `" and "`, `", and "`).
-- **Morphers:** Define transformations (pluralization, conjugation, casing, localization) applied during rendering.
-- **Rulebooks:** Specify root prompt sections, selection logic, and contextual entry points for rendering sessions.
+A lightweight IDE or CLI that packages namespaces, assets, and manifests.
 
-The tool must be able to export packages deterministically given the same inputs and seed.
+- Visual or structured editors for datatypes, promptsections, separatorsets, rulebooks, pools, morphers, and contextinterfaces.
+- Auto-complete and validation for fully qualified references (`namespace:component`).
+- Context simulation to preview promptsections and rulebooks with deterministic seeds.
+- Deterministic exports (YAML source of truth with JSON mirrors) signed for provenance.
 
-## Package Validator
+### Package Validator
 
-The package validator enforces structural and semantic rules, ensuring packages are interoperable across implementations. Key responsibilities include:
+A static analyser that ensures packages are consistent, deterministic, and marketplace-ready.
 
-- **Schema Validation:** Check manifest structure, namespace declarations, and dependency references.
-- **Determinism Checks:** Verify that all randomized elements are seeded and traceable, and that unsupported system randomness is disallowed.
-- **Compliance Reporting:** Produce tier-aligned reports so authors know whether their packages meet tier-one, tier-two, or reference requirements.
+- Schema validation for manifests and component definitions.
+- Semantic validation (min/max ranges, dependency resolution, contract satisfaction).
+- Determinism checks that forbid unseeded randomness and confirm UUID/timestamp derivations.
+- Compliance reporting for tiers and validator signatures.
 
-## Rendering Engine
+### Rendering Engine
 
-The rendering engine consumes validated packages and produces deterministic prompt output. Its responsibilities include:
+Executes rulebooks to produce prompts while enforcing deterministic behaviour.
 
-- **Seed Management:** Initialize render sessions with deterministic seeds and expose only allowed system random values.
-- **Template Resolution:** Resolve prompt sections recursively, including cross-namespace references.
-- **Ontology Integration:** Query ontologies and datatypes for context-aware placeholder resolution.
-- **Morpher Application:** Apply morphers and separator sets to ensure grammatically correct output.
-- **Rulebook Execution:** Traverse rulebooks to select root prompt sections, manage state, and provide repeatable branching behavior.
+- Depth-first template rendering with seeded random services (int, float, choice).
+- Scoped context store (global, prompt, section, custom scopes) with request/contribution flow.
+- Integration with contextinterfaces for declarative coordination (articles, gender, moods).
+- Pool management for collecting and drawing rendered fragments.
+- Batch-friendly APIs and observability hooks that emit deterministic identifiers.
 
-## Marketplace
+### Reference Libraries
 
-The marketplace (or registry) provides distribution, discovery, and governance features:
+Shared namespaces and utilities that speed implementation across teams.
 
-- **Package Hosting:** Store published packages with versioning, metadata, and dependency graphs.
-- **Compliance Badges:** Display compliance tiers and validator reports.
-- **Search & Discovery:** Surface packages by ontology domain, language, or compatibility.
-- **Runtime Delivery:** Offer APIs or download endpoints that rendering engines can consume directly.
-- **Economy Support (Future):** Enable licensing, monetization, or contribution tracking as part of the broader ecosystem.
+- Canonical `featured.common` package with baseline datatypes, separatorsets, morphers, and contextinterfaces.
+- Test fixtures for sanity scenarios and regression suites.
+- Language-specific ontologies and morphology packs curated for reuse.
 
-## Cross-Cutting Concerns
+### Marketplace
 
-- **Deterministic Build Pipelines:** Every component must preserve determinism across serialization, network transfer, and rendering.
-- **Extensibility:** The spec should allow new asset types (e.g., evaluators, testing suites) without breaking existing packages.
-- **Observability:** Logging and tracing should reference deterministic identifiers (UUIDs derived from seeds) where possible.
-- **Security & Integrity:** Packages must be signed and verifiable to prevent tampering in marketplaces or during local use.
+A registry for publishing and discovering packages.
+
+- Versioned storage with dependency graphs, integrity signatures, and provenance metadata.
+- Compliance badge display sourced from validator output.
+- Search filters by namespace, tags, locale, and compatibility.
+- APIs/CLI commands (`rpg install`, `rpg publish`) for automation.
+- Optional monetisation (licensing, revenue sharing) without affecting package formats.
+
+## Core Data Model
+
+RPG assets are data-first and namespaced. The following entities are serialisable to canonical YAML with deterministic JSON mirrors.
+
+- **Package** – Manifest with metadata, dependencies, compliance assertions, and namespace inventory.
+- **Namespace** – Logical grouping inside a package (e.g., `featured.common`). Holds component definitions.
+- **Datatype** – Namespaced list of values with optional tags (`article: a`, `gender: feminine`). Supports filtering and context contributions.
+- **PromptSection** – Template strings combining static text, references, repetition, conditionals, and context operations.
+- **SeparatorSet** – Trio of separators (primary, secondary, tertiary) for formatting repetitions.
+- **Rulebook** – Weighted entry promptsections, batch configuration, and required contextinterfaces.
+- **Pool** – Named collection that aggregates rendered fragments for later draws.
+- **ContextInterface** – Declarative specification of context keys, request flags, contributions, and validators.
+- **Morpher** – Deterministic transformation rules (pluralisation, conjugation, casing) using context and tags.
+
+### Data Relationships
+
+```mermaid
+erDiagram
+    PACKAGE ||--o{ NAMESPACE : contains
+    NAMESPACE ||--o{ DATATYPE : defines
+    NAMESPACE ||--o{ PROMPTSECTION : defines
+    NAMESPACE ||--o{ SEPARATORSET : defines
+    NAMESPACE ||--o{ RULEBOOK : defines
+    NAMESPACE ||--o{ POOL : defines
+    NAMESPACE ||--o{ CONTEXTINTERFACE : defines
+    NAMESPACE ||--o{ MORPHER : defines
+    RULEBOOK }|--|| PROMPTSECTION : uses
+    PROMPTSECTION }o--o{ DATATYPE : references
+    PROMPTSECTION }o--o{ PROMPTSECTION : nests
+    PROMPTSECTION }o--|| SEPARATORSET : joins
+    PROMPTSECTION }o--o{ CONTEXTINTERFACE : interacts
+    DATATYPE }o--o{ CONTEXTINTERFACE : contributes
+    POOL }o--o{ DATATYPE : aggregates
+    POOL }o--o{ PROMPTSECTION : aggregates
+```
+
+### Serialization Norms
+
+- Canonical YAML stores sorted keys and explicit anchors when used; JSON mirrors are generated deterministically.
+- Identifiers follow `<namespace>:<component>` for cross-package references.
+- Packages declare dependencies with semantic version ranges and optional capability tags (e.g., `provides: contracts.language.articles`).
+- Morphers and contextinterfaces may extend definitions from dependencies using additive merges.
+
+## Cross-Cutting Requirements
+
+- **Determinism:** All randomness, UUIDs, and timestamps derive from the rendering seed. Authoring and validator outputs must be reproducible.
+- **Extensibility:** New component types must declare JSON Schema extensions and compatibility notes without breaking existing packages.
+- **Observability:** Logs and traces reference deterministic identifiers. Validation and rendering outputs capture seed, package version, rulebook entry, and context snapshots.
+- **Security:** Packages are signed; registries verify integrity before distribution. Validator signatures accompany compliance reports.
 
 ## Open Questions
 
-- How should ontology versioning and backward compatibility be managed across packages?
-- What is the minimal manifest schema required for Tier One compliance?
-- Which serialization format ensures both human readability and deterministic parsing (JSON, YAML, or a custom DSL)?
-- How will morphers interact with localization frameworks to cover non-Latin scripts or right-to-left languages?
+- Governance of shared namespaces like `featured.common` (ownership, change control).
+- Strategies for ontology versioning and multilingual fallbacks.
+- Reference data format for morphers requiring complex linguistic rules (e.g., CLDR integration).

@@ -1,159 +1,137 @@
 ---
-title: RFC 0001 — Composite Random Prompt Generator
+title: RFC 0001 — Random Prompt Generator v1.0.0.rc1
 ---
 
-# RFC 0001 — Composite Random Prompt Generator
+# RFC 0001 — Random Prompt Generator v1.0.0.rc1
 
-- **Status:** Draft
-- **Authors:** TBD
+- **Status:** Published (Release Candidate)
+- **Authors:** RPG Working Group
 - **Reviewers:** TBD
 - **Created:** 2024-XX-XX
-- **Target Version:** v1.0.0-rc1
+- **Target Version:** v1.0.0.rc1
 
 ## Abstract
 
-This RFC establishes the baseline specification for the Composite Random Prompt Generator (CRPG) ecosystem. It describes the system architecture, domain model, package manifest, compliance tiers, and roadmap for a reference implementation capable of producing deterministic prompt outputs across diverse language ontologies.
+This RFC establishes the release-candidate specification for the Random Prompt Generator (RPG) ecosystem. It codifies the shared architecture, data model, templating language, and context semantics required to deliver deterministic prompt generation across independent implementations. The RFC also defines compliance expectations for the Authoring Tool, Package Validator, Rendering Engine, shared Libraries, and Marketplace workstreams.
 
 ## Motivation
 
-Prompt engineering workflows often mix ad-hoc templates with non-deterministic runtime behavior. CRPG introduces a deterministic, package-driven approach where authors define ontologies, templates, morphers, and rulebooks that can be validated, shared, and rendered reproducibly.
+Creative teams need deterministic, reusable prompts that can be authored collaboratively, validated automatically, and rendered reproducibly. Existing ad-hoc scripts lack portability and observability. RPG provides:
 
-## Design Principles
+- A data-first package format expressible in canonical YAML/JSON.
+- A declarative template language capable of advanced linguistic behaviour without hardcoding.
+- A scoped context model that allows components to request and supply information dynamically.
+- Governance hooks (compliance tiers, validator signatures) for marketplace-ready distribution.
 
-1. **Deterministic Rendering:** Rendering the same package with the same seed must produce identical output across compliant implementations.
-2. **Author Control:** Authors define ontologies, template logic, separator sets, and morphers; the system only provides seeded randomness, UUID generation, and timestamps.
-3. **Composable Packages:** Namespaces within packages can reference assets across package boundaries, enabling a modular ecosystem.
-4. **Tiered Compliance:** A tiered compliance model encourages incremental adoption while guiding the development of a complete reference implementation.
-5. **Schema Parity:** Core schemas must be expressible in YAML (preferred for authored assets) and JSON (for interoperability) without loss of fidelity.
+## Design Tenets
 
-## System Overview
+1. **Determinism Everywhere:** Rendering the same package with the same seed produces identical output across conforming engines.
+2. **Author Empowerment:** Logic lives in data—datatypes, contextinterfaces, morphers—not engine code.
+3. **Interoperable Packages:** Namespaces reference assets across packages through versioned dependencies and capability contracts.
+4. **Extensible but Stable:** New component types extend schemas without breaking existing packages.
+5. **Transparent Compliance:** Validators emit machine-readable reports so marketplaces and operators can trust published assets.
 
-```mermaid
-diagram TD
-    Package[Package]
-    Namespace[Namespace]
-    Rulebook[Rulebook]
-    PromptSection[Prompt Section]
-    Ontology[Ontology]
-    Morpher[Morpher]
-    SeparatorSet[Separator Set]
+## Architecture Overview
 
-    Package --> Namespace
-    Package --> Rulebook
-    Namespace --> PromptSection
-    Namespace --> Ontology
-    Namespace --> Morpher
-    Namespace --> SeparatorSet
-    PromptSection --> PromptSection
-    Rulebook --> PromptSection
-```
+The ecosystem splits into five collaborating implementations. Detailed responsibilities live in [Architecture & Data Model](../architecture/components.md).
 
-## Domain Model
+1. **Authoring Tool** – IDE/CLI for crafting packages, namespaces, and components with deterministic exports.
+2. **Package Validator** – Static analysis pipeline enforcing schemas, semantics, and determinism.
+3. **Rendering Engine** – Deterministic executor for rulebooks and templates, including context lifecycle.
+4. **Reference Libraries** – Canonical namespaces (e.g., `featured.common`) and reusable datasets.
+5. **Marketplace** – Registry APIs for publishing, discovering, and governing packages.
 
-### Packages
+## Data Model
 
-- Contain one or more namespaces.
-- Provide metadata (name, version, authors, compliance tier assertions).
-- Declare dependencies on other packages with semantic version constraints.
-- Include manifests for datatypes, ontologies, prompt sections, morphers, separator sets, and rulebooks.
+RPG packages bundle namespaced assets serialised to canonical YAML (source of truth) with deterministic JSON mirrors. Core entities include:
 
-### Namespaces
+- **Package & Manifest** – Metadata (id, version, authors, license), dependencies with semantic version ranges, capability declarations (`provides`/`requires` contracts), compliance assertions, and digital signatures.
+- **Namespace** – Logical grouping containing datatypes, promptsections, separatorsets, rulebooks, pools, morphers, and contextinterfaces.
+- **Datatype** – List or structured dataset with optional tags for context contribution. Supports filters and unique draws.
+- **PromptSection** – Template plus metadata (parameters, required interfaces, repetition constraints).
+- **SeparatorSet** – Primary/secondary/tertiary separators for list rendering.
+- **Morpher** – Deterministic transformations referencing tags and context.
+- **Rulebook** – Weighted entry promptsections, batch configuration (count, seed derivation), and required interfaces.
+- **Pool** – Collection aggregator for reuse during rendering.
+- **ContextInterface** – Declares context keys, request flags, contributions, and validators.
 
-- Provide a logical path for addressing assets (e.g., `core.characters.hero`).
-- Allow referencing assets in other namespaces via fully qualified identifiers.
-- Support multiple namespaces per package with isolated defaults.
+A full entity relationship diagram appears in [Architecture & Data Model](../architecture/components.md#data-relationships).
 
-### Datatypes
+## Template Language
 
-- Define primitive types (string, integer, date) and complex compositions (records, arrays, enumerations).
-- Support validation rules (ranges, patterns) and deterministic serialization hints.
+Promptsections use the RPG template language described in [Template Syntax](../architecture/template-syntax.md). Implementations MUST:
 
-### Prompt Sections
+- Support datatype and promptsection references with `min`/`max` repetition, `sep` selectors, and tag filters.
+- Implement the context helper suite (`context.get`, `set`, `has`, `request`, `random`).
+- Honour the EBNF grammar, including escaping (`\{`, `\}`) and nested expressions.
+- Enforce semantic rules via validation (e.g., `min <= max`, referenced assets exist, pool constraints satisfied).
 
-- Contain templates written in a deterministic templating language.
-- May reference other prompt sections (`include` or `slot` semantics).
-- Express conditional logic and iteration controlled by deterministic evaluation of inputs and seeded randomness.
+## Rendering Context
 
-### Ontologies
+Context semantics follow [Context Interactions](../architecture/context-interactions.md): namespaced keys, scoped lifecycles, declarative ContextInterfaces, and deterministic contribution ordering. Engines MUST:
 
-- Provide language- and domain-specific vocabularies.
-- Support localization and morphological data (gender, plurality, tense).
-- Offer deterministic lookup functions keyed by identifiers and optional filters.
-
-### Separator Sets
-
-- Define textual separators for joining lists with grammatically appropriate conjunctions.
-- Support locale-specific patterns such as Oxford commas or language-specific conjunction rules.
-
-### Morphers
-
-- Transform text deterministically (pluralization, conjugation, casing, transliteration).
-- Allow chaining of transformations and reference ontological metadata for decisions.
-
-### Rulebooks
-
-- Enumerate entry-point prompt sections to render.
-- Define selection policies (deterministic sequences, seed-derived choices).
-- Manage state across nested prompt section executions.
-
-## Package Manifest
-
-Packages include a manifest file (primary: `package.yaml`, secondary: `package.json`) describing:
-
-- Metadata: name, version, authors, license, description.
-- Compliance: self-declared tier, validator signature.
-- Dependencies: list of package identifiers with semantic version ranges.
-- Assets: enumerations of namespaces, datatypes, ontologies, prompt sections, morphers, separator sets, rulebooks.
-- Determinism: seed handling policy, UUID derivation strategy, timestamp usage declarations.
-- Contracts: required and provided ontology/morpher contracts for marketplace validation.
-
-### Serialization Requirements
-
-- YAML is the canonical authoring format and must serialize deterministically (sorted keys, explicit anchors when used).
-- JSON representations are derived mechanically from the YAML source to aid tooling and CI integrations.
-- Both formats share a single schema definition (e.g., JSON Schema) to guarantee parity.
-
-### Tooling Expectations
-
-- Tier 1 compliant implementations expose a CLI that can lint manifests, convert between YAML and JSON, and surface schema errors.
-- Higher tiers may add GUI workflows, but the CLI must remain the source of truth for CI/CD automation.
+- Initialise context per prompt and respect scope fallback order.
+- Evaluate contributions in render order, resolving ties via `priority`.
+- Surface deterministic diagnostics (seed, scope, key) when validation fails.
+- Provide hooks for debug snapshots without altering rendering results.
 
 ## Compliance Tiers
 
 | Tier | Scope | Requirements |
 | --- | --- | --- |
-| **Tier 1 — Standalone Renderer** | Implementations without marketplace features. | Deterministic rendering, manifest compliance, validator integration, seed control API. |
-| **Tier 2 — Authoring & Validation Suite** | End-to-end authoring + validation workflows. | All Tier 1 requirements plus authoring exports, ontology editing, deterministic packaging. |
-| **Tier 3 — Reference Implementation** | Full ecosystem including marketplace. | All Tier 1 and 2 requirements plus package registry, distribution APIs, compliance badge publication, security & integrity checks. |
+| **Tier 1 — Renderer Core** | Rendering engines and CLI utilities. | Template grammar compliance, context lifecycle, deterministic randomness, manifest consumption, and seed management APIs. |
+| **Tier 2 — Authoring & Validation** | Authoring Tool + Package Validator. | Tier 1 plus package creation/export, schema validation, semantic analysis, validator signatures, deterministic package archives. |
+| **Tier 3 — Marketplace** | Full ecosystem with registry services. | Tier 1 & 2 plus package hosting, dependency graph APIs, compliance badge publication, signing/verification, and audit logging. |
 
-Compliance reports must detail which requirements are met, provide validator signatures, and highlight deviations.
+Compliance reports MUST include:
 
-## Rendering Determinism
+- Implementation identifier and version.
+- Tier satisfied and optional partial capabilities.
+- Validator signature with timestamp and deterministic hash of the analysed package or service configuration.
 
-Rendering sessions follow these rules:
+## Reference Implementations
 
-1. Seed is derived from user input or package defaults and logged for reproducibility.
-2. All calls to random number generation, UUID creation, or timestamp retrieval must be seeded or derived deterministically from the root seed.
-3. Template execution state (loop counters, condition results) must be deterministic given inputs and seed.
-4. Outputs include metadata referencing the package version, rulebook entry, and seed used.
+To reach v1.0.0, the working group will build reference implementations covering:
 
-## Roadmap to v1.0.0-rc1
+- **Libraries:** Canonical packages (`featured.common`, language packs) and reusable validator test fixtures.
+- **Authoring Tool:** CLI/GUI that edits components, simulates context interactions, and exports signed packages.
+- **Package Validator:** CLI service verifying schemas, semantics, and deterministic guarantees; emits machine-readable reports.
+- **Rendering Engine:** Deterministic executor with batch support, observability hooks, and pool/context tooling.
+- **Marketplace:** Registry with publish/install APIs, provenance checks, and capability search.
 
-1. **Finalize Manifest Schema:** Define JSON Schema for package manifests and namespace contents.
-2. **Authoring Tool Prototype:** Build CLI/GUI for composing packages, ontologies, and prompt sections.
-3. **Validator Implementation:** Provide open-source validator capable of verifying compliance tiers.
-4. **Rendering Engine PoC:** Implement deterministic renderer supporting seed management, morphers, and separator sets.
-5. **Marketplace Blueprint:** Describe service interfaces for publishing and retrieving packages with integrity guarantees.
+Each implementation MUST publish API surface documentation, seed handling guidance, and integration examples tied to the sanity scenarios.
+
+## Security & Integrity
+
+- Packages and compliance reports are signed using repository-approved cryptography (e.g., Ed25519). Signatures cover manifests, component definitions, and artifacts.
+- Registries verify signatures and retain provenance metadata (submitter, validator, timestamp).
+- Rendering engines expose configuration to lock down allowed packages and namespaces.
+
+## Observability & Debugging
+
+- Rendering sessions log seed, rulebook entry, package versions, and context snapshots (debug mode) without introducing nondeterminism.
+- Validators output structured diagnostics (machine and human readable) with deterministic ordering.
+- Authoring tools record export metadata (seed, dependency graph, signatures) for reproducibility.
+
+## Roadmap
+
+1. **Schema Finalisation:** Publish JSON Schema for all component types and manifests.
+2. **Reference Packages:** Deliver `featured.common` and multilingual packs covering article, gender, and mood interfaces.
+3. **Tooling MVPs:** Ship CLI prototypes for authoring, validation, and rendering to exercise the spec end to end.
+4. **Marketplace Alpha:** Stand up registry APIs with publish/install flows and compliance badge ingestion.
+5. **Feedback Loop:** Collect implementer feedback, update RFC errata, and stabilise for v1.0.0.
 
 ## Open Issues
 
-- Clarify how ontologies support multilingual fallbacks and dialect variants.
-- Determine test fixture format for verifying deterministic rendering across implementations.
-- Explore integration points for analytics or usage tracking without compromising determinism.
-- Define governance model for approving new asset types or schema changes.
+- Governance for evolving shared namespaces and approving breaking schema changes.
+- Localisation strategy for morphers relying on external datasets (e.g., CLDR integration).
+- Version negotiation between marketplace clients and registries for capability discovery.
+- Long-term metrics/analytics strategy that preserves determinism and privacy.
 
 ## References
 
-- Deterministic random generation techniques
-- Localization frameworks for morphological analysis
-- Package registry best practices (e.g., npm, crates.io)
+- [Architecture & Data Model](../architecture/components.md)
+- [Context Interactions](../architecture/context-interactions.md)
+- [Template Syntax](../architecture/template-syntax.md)
+- [Sanity Check Scenarios](../sanity-checks/index.md)
+- [Operations Guide](../operations/index.md)
