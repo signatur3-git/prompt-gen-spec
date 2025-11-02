@@ -1,10 +1,11 @@
----
-title: RPG Documentation Project Plan (M0 Draft)
+title: RPG Documentation Project Plan (M0 Approved)
 ---
 
 # RPG Documentation Project Plan
 
 This plan outlines the workstreams, schedule, and governance checkpoints required to complete the RPG v1.0.0.rc1 documentation milestones. It satisfies Milestone M0 acceptance criteria and provides the coordination framework for subsequent deliverables.
+
+> **Governance approval:** Ratified by the Steering Committee on 2024-04-12 following completion of the M0 review cycle.
 
 ## 1. Workstreams & Ownership
 
@@ -21,15 +22,15 @@ This plan outlines the workstreams, schedule, and governance checkpoints require
 
 ## 2. Milestone Schedule & Dependencies
 
-| Milestone | Target Completion | Key Dependencies | Decision Gate |
-| --- | --- | --- | --- |
-| M0 – Discovery & Planning | 2024-04-19 | Availability of workstream leads; approval of style guide. | Steering Committee approval of this plan and style guide. |
-| M1 – Source-of-Truth Alignment | 2024-05-03 | Glossary inputs from architecture; RFC clause mapping. | Architecture & RFC editors sign-off. |
-| M2 – Authoring Tool Blueprint | 2024-05-17 | Authoring Tool SMEs availability; compliance review. | Authoring Tool workstream review. |
-| M3 – Compliance Framework Drafting | 2024-05-31 | M1 glossary alignment; Validator artefact inventory. | Compliance council walkthrough. |
-| M4 – Implementation Guide Drafting | 2024-06-21 | Completion of M2/M3 drafts; rendering & marketplace SMEs. | Cross-stream peer review checkpoint. |
-| M5 – RFP Consolidation & Review | 2024-07-05 | All draft guides at 80% readiness; review tooling configured. | Governance & legal joint session. |
-| M6 – Publication & Handover | 2024-07-19 | Final approvals; publication infrastructure readiness. | Release management sign-off. |
+| Milestone | Target Completion | Key Dependencies | Decision Gate | Status |
+| --- | --- | --- | --- | --- |
+| M0 – Discovery & Planning | 2024-04-19 | Availability of workstream leads; approval of style guide. | Steering Committee approval of this plan and style guide. | ✅ Approved |
+| M1 – Source-of-Truth Alignment | 2024-05-03 | Glossary inputs from architecture; RFC clause mapping. | Architecture & RFC editors sign-off. | 🔄 In progress |
+| M2 – Authoring Tool Blueprint | 2024-05-17 | Authoring Tool SMEs availability; compliance review. | Authoring Tool workstream review. | ⏳ Not started |
+| M3 – Compliance Framework Drafting | 2024-05-31 | M1 glossary alignment; Validator artefact inventory. | Compliance council walkthrough. | ⏳ Not started |
+| M4 – Implementation Guide Drafting | 2024-06-21 | Completion of M2/M3 drafts; rendering & marketplace SMEs. | Cross-stream peer review checkpoint. | ⏳ Not started |
+| M5 – RFP Consolidation & Review | 2024-07-05 | All draft guides at 80% readiness; review tooling configured. | Governance & legal joint session. | ⏳ Not started |
+| M6 – Publication & Handover | 2024-07-19 | Final approvals; publication infrastructure readiness. | Release management sign-off. | ⏳ Not started |
 
 ## 3. Review Cadence & Rituals
 
@@ -54,7 +55,7 @@ This plan outlines the workstreams, schedule, and governance checkpoints require
 
 ## 6. Next Actions
 
-1. Circulate this plan and the style guide for steering committee approval by **2024-04-12**.
+1. Publish the approved plan and style guide in the documentation index and archive the governance decision record.
 2. Configure GitHub Project board with milestone swimlanes and assign initial backlog items from the inventory.
 3. Confirm owner availability for the upcoming weekly stand-up and editorial review cadence.
 

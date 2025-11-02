@@ -1,10 +1,11 @@
----
-title: Documentation Inventory & Gap Analysis (M0)
+title: Documentation Inventory & Gap Analysis (M0 Approved)
 ---
 
 # Documentation Inventory & Gap Analysis
 
 This inventory catalogs the current documentation assets that contribute to the RPG v1.0.0.rc1 Request for Proposal. Each entry identifies how the asset maps to RFP sections, ownership expectations, and outstanding gaps to reach milestone M0 acceptance criteria. Documents located inside the `source-of-truth` directory are treated as immutable reference material and are not included in the change backlog.
+
+> **Governance approval:** Reviewed with workstream leads and accepted on 2024-04-12. Update the gap notes as milestones progress.
 
 ## Inventory Snapshot
 
@@ -31,8 +32,8 @@ This inventory catalogs the current documentation assets that contribute to the 
 
 ## Next Steps for M0 Completion
 
-- Validate inventory with workstream leads and tag gaps in backlog tracking spreadsheet (see project plan).
+- Publish link to this inventory from `docs/index.md` now that governance approval is complete.
 - Confirm custodians for each document and record review cadence in the project plan.
-- Publish link to this inventory from `docs/index.md` once governance approves.
+- Keep gap tags synchronized with backlog tracking tooling as documents evolve.
 
 root@50b9aa70c633:/workspace/prompt-gen-spec#

@@ -16,6 +16,7 @@ The Random Prompt Generator (RPG) initiative defines a deterministic, package-dr
 ## Key Documents
 
 - [RFC 0001: Random Prompt Generator v1.0.0.rc1](./rfc/0001-composite-random-prompt-generator.md)
+- [Architecture Overview](./architecture/overview.md)
 - [Architecture & Data Model](./architecture/components.md)
 - [Context Interactions](./architecture/context-interactions.md)
 - [Template Syntax](./architecture/template-syntax.md)
@@ -23,6 +24,10 @@ The Random Prompt Generator (RPG) initiative defines a deterministic, package-dr
 - [Operations Guide](./operations/index.md)
 - [Glossary](./glossary.md)
 - [Project Management Assets](./project-management/milestones.md)
+  - [Documentation Inventory (M0 Approved)](./project-management/m0-documentation-inventory.md)
+  - [Documentation Project Plan](./project-management/documentation-project-plan.md)
+  - [Documentation Style Guide](./project-management/documentation-style-guide.md)
+  - [Source-of-Truth Mapping](./project-management/m1-source-of-truth-mapping.md)
 
 ## Reference Implementation Targets
 
@@ -36,8 +41,8 @@ The v1.0.0.rc1 roadmap covers five collaborating workstreams. Each library or se
 
 ## Status
 
-- **Current milestone:** RFC v1.0.0.rc1 published for implementation kickoff.
-- **Next steps:** Build reference implementations, capture feedback, and iterate towards v1.0.0.
+- **Current milestone:** M1 – Source-of-Truth Alignment in progress following M0 governance approval.
+- **Next steps:** Update glossary and architecture references, publish the source-of-truth mapping, and build reference implementations aligned with v1.0.0.rc1.
 - **Roadmap & RFP planning:** See the [delivery roadmap](./project-management/milestones.md) and [RFP outline](./project-management/rfp-outline.md) for milestone tracking and vendor guidance.
 
 ## Feedback and Contributions
