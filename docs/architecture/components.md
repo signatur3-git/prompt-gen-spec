@@ -7,7 +7,7 @@ title: Architecture Components
 The Composite Random Prompt Generator (CRPG) ecosystem is composed of modular components that can be combined into packages and distributed via marketplaces. The sections below outline the core components and their responsibilities.
 
 ```mermaid
-diagram LR
+graph LR
     Authoring[Authoring Tool]
     Validator[Package Validator]
     Renderer[Rendering Engine]

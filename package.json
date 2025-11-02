@@ -2,6 +2,7 @@
   "name": "prompt-gen-spec",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "description": "Specification site for the Composite Random Prompt Generator (CRPG).",
   "license": "CC0-1.0",
   "scripts": {
@@ -12,7 +13,11 @@
     "check:prettier": "prettier --check \"**/*.{md,ts,js,json,yml,yaml}\""
   },
   "devDependencies": {
-    "prettier": "3.2.5",
-    "vitepress": "1.2.3"
+    "@mdit/plugin-katex": "^0.23.2",
+    "katex": "^0.16.25",
+    "markdown-it": "^14.1.0",
+    "mermaid": "^11.12.1",
+    "vitepress": "^1.6.4",
+    "vitepress-plugin-mermaid": "^2.0.17"
   }
 }
