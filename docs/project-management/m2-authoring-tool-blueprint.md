@@ -6,6 +6,8 @@ title: M2 Authoring Tool Documentation Blueprint
 
 This blueprint sequences the Authoring Tool documentation workstream for Milestone M2. It assumes the glossary, architecture overview, and source-of-truth mapping published during M1 remain the canonical references for terminology and component responsibilities.
 
+> **Governance Status (2024-05-18):** Steering Committee approved the blueprint as submitted, confirmed evidence coverage for compliance linkage, and authorized the compliance workstream to begin Milestone M3 activities.
+
 ## 1. Documentation Outline
 
 | Section | Purpose | Key Inputs | Acceptance Notes |
@@ -17,7 +19,7 @@ This blueprint sequences the Authoring Tool documentation workstream for Milesto
 | **5. CLI Reference** | Document commands, flags, configuration files, and exit codes. | Source-of-truth CLI spec (`source-of-truth/template-engine.md` for syntax alignment); repo CLI docs. | Use tabular format with examples and link to evidence snippets. |
 | **6. API & Automation Hooks** | Capture REST/GraphQL endpoints, webhooks, and automation integration patterns. | RFC integration requirements; architecture context. | Flag authentication, rate limits, and versioning policy. |
 | **7. UI Flows & Accessibility** | Outline primary screens, navigation, and accessibility commitments (ARIA, keyboard support). | UX wireframes (to be sourced from design); glossary terminology. | Provide screenshot placeholders tied to evidence checklist IDs. |
-| **8. Compliance Touchpoints** | Map Baseline, Advanced, and Premium requirements to Authoring Tool features and operational controls. | Future M3 compliance guide; `docs/sanity-checks/index.md`. | Include traceability matrix hooks for future linking. |
+| **8. Compliance Touchpoints** | Map Baseline, Advanced, and Premium requirements to Authoring Tool features and operational controls. | [M3 Compliance Framework Draft](./m3-compliance-framework-draft.md); `docs/sanity-checks/index.md`; `docs/compliance/index.md`. | Include traceability matrix hooks for future linking and cross-reference template IDs (AT-E05, CV-BAS-01, CV-ADV-01, CV-PREM-01). |
 | **9. Appendices** | Glossary references, configuration templates, sample packages, and troubleshooting guide. | Glossary; sample repos; sanity check data. | Document location for downloadable assets and version history. |
 
 ## 2. Evidence Capture Checklist
@@ -30,7 +32,7 @@ The following artefacts will be gathered during drafting and stored in the docum
 | AT-E02 | CLI command transcripts for package creation, validation, and publication (including error cases). | Casey Grant | After CLI dry runs with sanity checks | Capture deterministic seeds and configuration files alongside transcripts. |
 | AT-E03 | Sample package repository demonstrating recommended structure and metadata. | Morgan Silva | Coordinate with Rendering workstream before 2024-05-24 | Tag release with compliance tier labels for future referencing. |
 | AT-E04 | Configuration snippet library (YAML/JSON) for automation hooks and CI integration. | Alex Morgan | Post-automation dry run (Week of 2024-05-27) | Link to operations guide updates when available. |
-| AT-E05 | Compliance checkpoint log template aligning authoring actions with evidence submission. | Priya Shah | Co-developed with M3 compliance draft | Iteration expected once compliance templates are available. |
+| AT-E05 | Compliance checkpoint log template aligning authoring actions with evidence submission. | Priya Shah | Co-developed with M3 compliance draft | Operating guide published under `docs/compliance/at-e05-compliance-checkpoint-log.md`; ensure AT-E05 entries reference CV-BAS-01/CV-ADV-01 filenames captured in validator runs. |
 
 > **Backlog Integration:** Each Evidence ID above has a corresponding card in the documentation Kanban board (swimlane “M2 – Authoring Tool Blueprint”). Owners are responsible for attaching artefacts to the repository and tagging the card with the evidence ID upon completion.
 
@@ -62,4 +64,10 @@ Schedule interviews with Authoring Tool maintainers (Morgan Silva, Casey Grant) 
 - Begin drafting outline sections 1–4 immediately after approvals, using Evidence IDs to track required artefacts.
 
 > **Acceptance Alignment:** Completing the steps above satisfies M2 acceptance criteria: outline approval (Section 1), evidence checklist integration (Section 2), and SME questionnaire distribution plus scheduling (Sections 3–4).
+
+## 5. Wrap-Up Summary
+
+- Blueprint deliverables accepted by Authoring Tool and compliance leads with no outstanding actions.
+- Evidence capture IDs (AT-E01–AT-E05) have active backlog cards; AT-E05 now anchors the compliance evidence pathway for sanity check outputs.
+- M3 team will use Sections 1, 2, and 8 as seed material for the compliance framework drafts and validation template pilots.
 
