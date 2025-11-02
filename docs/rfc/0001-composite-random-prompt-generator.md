@@ -120,11 +120,11 @@ Packages include a manifest file (primary: `package.yaml`, secondary: `package.j
 
 ## Compliance Tiers
 
-| Tier                                      | Scope                                         | Requirements                                                                                                                       |
-| ----------------------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| **Tier 1 — Standalone Renderer**          | Implementations without marketplace features. | Deterministic rendering, manifest compliance, validator integration, seed control API.                                             |
-| **Tier 2 — Authoring & Validation Suite** | End-to-end authoring + validation workflows.  | All Tier 1 requirements plus authoring exports, ontology editing, deterministic packaging.                                         |
-| **Tier 3 — Reference Implementation**     | Full ecosystem including marketplace.         | All Tier 1 and 2 requirements plus package registry, distribution APIs, compliance badge publication, security & integrity checks. |
+| Tier | Scope | Requirements |
+| --- | --- | --- |
+| **Tier 1 — Standalone Renderer** | Implementations without marketplace features. | Deterministic rendering, manifest compliance, validator integration, seed control API. |
+| **Tier 2 — Authoring & Validation Suite** | End-to-end authoring + validation workflows. | All Tier 1 requirements plus authoring exports, ontology editing, deterministic packaging. |
+| **Tier 3 — Reference Implementation** | Full ecosystem including marketplace. | All Tier 1 and 2 requirements plus package registry, distribution APIs, compliance badge publication, security & integrity checks. |
 
 Compliance reports must detail which requirements are met, provide validator signatures, and highlight deviations.
 
