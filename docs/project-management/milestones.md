@@ -12,7 +12,7 @@ This roadmap focuses exclusively on the documentation artefacts required to prov
 | --- | --- | --- | --- |
 | M0 | Documentation discovery & planning | Program Management | ✅ Complete |
 | M1 | Source-of-truth alignment | Architecture, RFC, Glossary | 🔄 In progress |
-| M2 | Authoring Tool documentation blueprint | Authoring Tool, Compliance | ⏳ Not started |
+| M2 | Authoring Tool documentation blueprint | Authoring Tool, Compliance | 🔄 In progress |
 | M3 | Compliance framework drafting | Compliance, Validator | ⏳ Not started |
 | M4 | Implementation guide drafting | Rendering, Libraries, Marketplace | ⏳ Not started |
 | M5 | RFP consolidation & review | Program Management, Legal | ⏳ Not started |
@@ -42,12 +42,12 @@ This roadmap focuses exclusively on the documentation artefacts required to prov
   2. Architecture overview reviewed by at least two documentation authors outside the architecture team.
   3. Mapping document stored in repository at `docs/project-management/m1-source-of-truth-mapping.md` and referenced in subsequent milestone briefs.
 
-### M2 – Authoring Tool Documentation Blueprint
+### M2 – Authoring Tool Documentation Blueprint *(In progress)*
 - **Purpose:** Define the structure, content outline, and research tasks for the Authoring Tool documentation package.
 - **Deliverables:**
-  - Detailed outline covering user journeys, CLI/API references, UI flows (if applicable), and compliance touchpoints.
-  - Evidence checklist specifying screenshots, data samples, and configuration snippets to be captured.
-  - Interview/sme questionnaire for Authoring Tool maintainers.
+  - Detailed outline covering user journeys, CLI/API references, UI flows (if applicable), and compliance touchpoints, published at [`docs/project-management/m2-authoring-tool-blueprint.md`](./m2-authoring-tool-blueprint.md).
+  - Evidence checklist specifying screenshots, data samples, and configuration snippets to be captured, aligned with the documentation backlog.
+  - Interview/SME questionnaire for Authoring Tool maintainers with scheduling guidance.
 - **Acceptance Criteria:**
   1. Outline approved by Authoring Tool workstream and compliance leads.
   2. Evidence checklist integrated into documentation backlog with owners assigned.
