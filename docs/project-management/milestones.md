@@ -8,19 +8,19 @@ This roadmap focuses exclusively on the documentation artefacts required to prov
 
 ## Milestone Overview
 
-| Milestone | Summary | Primary Workstreams |
-| --- | --- | --- |
-| M0 | Documentation discovery & planning | Program Management |
-| M1 | Source-of-truth alignment | Architecture, RFC, Glossary |
-| M2 | Authoring Tool documentation blueprint | Authoring Tool, Compliance |
-| M3 | Compliance framework drafting | Compliance, Validator |
-| M4 | Implementation guide drafting | Rendering, Libraries, Marketplace |
-| M5 | RFP consolidation & review | Program Management, Legal |
-| M6 | Publication & handover | All |
+| Milestone | Summary | Primary Workstreams | Status |
+| --- | --- | --- | --- |
+| M0 | Documentation discovery & planning | Program Management | ✅ Complete |
+| M1 | Source-of-truth alignment | Architecture, RFC, Glossary | 🔄 In progress |
+| M2 | Authoring Tool documentation blueprint | Authoring Tool, Compliance | ⏳ Not started |
+| M3 | Compliance framework drafting | Compliance, Validator | ⏳ Not started |
+| M4 | Implementation guide drafting | Rendering, Libraries, Marketplace | ⏳ Not started |
+| M5 | RFP consolidation & review | Program Management, Legal | ⏳ Not started |
+| M6 | Publication & handover | All | ⏳ Not started |
 
 ## Milestone Detail & Acceptance Criteria
 
-### M0 – Documentation Discovery & Planning
+### M0 – Documentation Discovery & Planning *(Complete)*
 - **Purpose:** Establish the documentation backlog, contributors, and editorial standards before drafting begins.
 - **Deliverables:**
   - Inventory of existing documents mapped to required deliverables.
@@ -31,16 +31,16 @@ This roadmap focuses exclusively on the documentation artefacts required to prov
   2. Style guide reviewed by all workstream leads and linked from documentation index.
   3. Project plan approved with sign-off from governance and documentation editors.
 
-### M1 – Source-of-Truth Alignment
+### M1 – Source-of-Truth Alignment *(In progress)*
 - **Purpose:** Align terminology, data models, and architectural references across all documentation tracks.
 - **Deliverables:**
   - Updated glossary synchronized with RFC 0001 terminology.
   - Architecture overview summarizing core components, interfaces, and data flows for reference by writers.
-  - Source-of-truth mapping that links RFC clauses to supporting documents.
+  - Source-of-truth mapping that links RFC clauses to supporting documents and is stored at `docs/project-management/m1-source-of-truth-mapping.md`.
 - **Acceptance Criteria:**
   1. Glossary approved by architecture and RFC editors.
   2. Architecture overview reviewed by at least two documentation authors outside the architecture team.
-  3. Mapping document stored in repository and referenced in subsequent milestone briefs.
+  3. Mapping document stored in repository at `docs/project-management/m1-source-of-truth-mapping.md` and referenced in subsequent milestone briefs.
 
 ### M2 – Authoring Tool Documentation Blueprint
 - **Purpose:** Define the structure, content outline, and research tasks for the Authoring Tool documentation package.

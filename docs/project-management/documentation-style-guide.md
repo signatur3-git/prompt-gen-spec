@@ -1,10 +1,11 @@
----
-title: RPG Documentation Style Guide (M0 Draft)
+title: RPG Documentation Style Guide (M0 Approved)
 ---
 
 # RPG Documentation Style Guide
 
-This draft establishes the formatting, citation, and change-control conventions for the RPG v1.0.0.rc1 documentation program. It is scoped to meet Milestone M0 acceptance criteria and will be refined as additional deliverables are authored.
+This guide establishes the formatting, citation, and change-control conventions for the RPG v1.0.0.rc1 documentation program. It meets Milestone M0 acceptance criteria and will be refined as additional deliverables are authored.
+
+> **Governance approval:** Ratified alongside the M0 plan on 2024-04-12. Future revisions should note review checkpoints in document metadata once owner assignments are finalized.
 
 ## 1. Structure & Formatting
 
