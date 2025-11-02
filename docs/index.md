@@ -22,6 +22,7 @@ The Random Prompt Generator (RPG) initiative defines a deterministic, package-dr
 - [Sanity Check Scenarios](./sanity-checks/index.md)
 - [Operations Guide](./operations/index.md)
 - [Glossary](./glossary.md)
+- [Project Management Assets](./project-management/milestones.md)
 
 ## Reference Implementation Targets
 
@@ -37,6 +38,7 @@ The v1.0.0.rc1 roadmap covers five collaborating workstreams. Each library or se
 
 - **Current milestone:** RFC v1.0.0.rc1 published for implementation kickoff.
 - **Next steps:** Build reference implementations, capture feedback, and iterate towards v1.0.0.
+- **Roadmap & RFP planning:** See the [delivery roadmap](./project-management/milestones.md) and [RFP outline](./project-management/rfp-outline.md) for milestone tracking and vendor guidance.
 
 ## Feedback and Contributions
 
