@@ -26,7 +26,7 @@ This plan outlines the workstreams, schedule, and governance checkpoints require
 | --- | --- | --- | --- | --- |
 | M0 – Discovery & Planning | 2024-04-19 | Availability of workstream leads; approval of style guide. | Steering Committee approval of this plan and style guide. | ✅ Approved |
 | M1 – Source-of-Truth Alignment | 2024-05-03 | Glossary inputs from architecture; RFC clause mapping. | Architecture & RFC editors sign-off. | 🔄 In progress |
-| M2 – Authoring Tool Blueprint | 2024-05-17 | Authoring Tool SMEs availability; compliance review. | Authoring Tool workstream review. | ⏳ Not started |
+| M2 – Authoring Tool Blueprint | 2024-05-17 | Authoring Tool SMEs availability; compliance review. | Authoring Tool workstream review. | 🔄 In progress |
 | M3 – Compliance Framework Drafting | 2024-05-31 | M1 glossary alignment; Validator artefact inventory. | Compliance council walkthrough. | ⏳ Not started |
 | M4 – Implementation Guide Drafting | 2024-06-21 | Completion of M2/M3 drafts; rendering & marketplace SMEs. | Cross-stream peer review checkpoint. | ⏳ Not started |
 | M5 – RFP Consolidation & Review | 2024-07-05 | All draft guides at 80% readiness; review tooling configured. | Governance & legal joint session. | ⏳ Not started |
@@ -42,6 +42,7 @@ This plan outlines the workstreams, schedule, and governance checkpoints require
 
 - Maintain a shared Kanban board (e.g., GitHub Projects) with swimlanes for each milestone (M0–M6).
 - Tag backlog items with corresponding RFP section numbers to keep deliverables aligned with `rfp-outline.md`.
+- Track M2 evidence capture cards using the Evidence IDs defined in `m2-authoring-tool-blueprint.md` and assign the listed owners to each card.
 - Use repository issues to capture feedback requiring documentation updates; reference the relevant document and milestone in each issue title.
 - Store meeting notes and decisions in `docs/project-management/meeting-notes/` (folder to be created during M1).
 
